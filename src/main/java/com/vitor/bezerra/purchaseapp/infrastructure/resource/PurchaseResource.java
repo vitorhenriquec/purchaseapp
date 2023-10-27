@@ -31,6 +31,6 @@ public interface PurchaseResource {
     )
     ResponseEntity<CreatePurchaseResponse> createTransaction(
             @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Purchase data to be store")
-            @RequestBody CreatePurchaseRequest request
+            CreatePurchaseRequest request
     );
 }

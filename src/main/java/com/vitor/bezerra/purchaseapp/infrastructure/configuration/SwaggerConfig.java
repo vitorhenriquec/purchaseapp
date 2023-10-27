@@ -1,5 +1,6 @@
 package com.vitor.bezerra.purchaseapp.infrastructure.configuration;
 
+
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
@@ -20,6 +21,8 @@ public class SwaggerConfig {
                                 .description("An app to store purchase")
                                 .contact(new Contact().name("Vitor Henrique Coelho Bezerr").email("vitorhenrique908@gmail.com"))
                                 .license(new License().name("(c) Copyright"))
+
                 );
     }
+
 }

@@ -1,4 +1,8 @@
-CREATE sequence sq_purchase_idt;
+CREATE sequence sq_purchase_idt INCREMENT BY 1
+                                START WITH 1
+                                MAXVALUE 99999999999
+                                MINVALUE 1
+                                CACHE 10;
 
 CREATE TABLE purchase (
     id int8,

@@ -4,6 +4,7 @@ import com.vitor.bezerra.purchaseapp.domain.model.PurchaseModel;
 import com.vitor.bezerra.purchaseapp.domain.usecase.CreatePurchaseUseCase;
 import com.vitor.bezerra.purchaseapp.infrastructure.resource.exchange.CreatePurchaseRequest;
 import com.vitor.bezerra.purchaseapp.infrastructure.resource.exchange.CreatePurchaseResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,11 +13,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @AllArgsConstructor
 @RestController
 @RequestMapping(name = "/v1")
+@Tag(name = "Purchase")
 public class PurchaseResourceImpl implements PurchaseResource {
 
     private final CreatePurchaseUseCase createPurchaseUseCase;
@@ -33,6 +37,7 @@ public class PurchaseResourceImpl implements PurchaseResource {
         var purchaseModel = new PurchaseModel();
         purchaseModel.setDescription(request.description());
         purchaseModel.setAmount(request.amount());
+        purchaseModel.setCreatedAt(LocalDate.now());
 
         purchaseModel =  createPurchaseUseCase.createPurchase(purchaseModel);
 
