@@ -19,12 +19,17 @@ spring:
   database:
     driverClassName: org.postgresql.Driver
   flyway:
-    enabled: true
+    enabled: true #Enable false for production
     url: jdbc:postgresql://localhost:5432/postgres
     schemas: public
     user: "PURCHASE_ACCOUNTING_ADMIN"
     password: "PURCHASE_ACCOUNTING_LOCAL"
 
+feign:
+  client:
+    config:
+      fiscalData:
+        url: "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/od/rates_of_exchange"
 
 server:
   port: 8081
