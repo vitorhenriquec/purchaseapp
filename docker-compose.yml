@@ -1,0 +1,22 @@
+version: '3.3'
+
+networks:
+  purchase_network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 145.0.0.0/16
+
+
+services:
+  purchase_postgres:
+    container_name: purchase_postgres
+    image: postgres:13.5
+    ports:
+      - "5432:5432"
+    networks:
+      purchase_network:
+        ipv4_address: 145.0.0.2
+    environment:
+      POSTGRES_USER: "PURCHASE_ACCOUNTING_ADMIN"
+      POSTGRES_PASSWORD: "PURCHASE_ACCOUNTING_LOCAL"

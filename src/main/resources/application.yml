@@ -1,0 +1,35 @@
+springdoc:
+  api-docs:
+    enabled: true
+
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: PURCHASE_ACCOUNTING_ADMIN
+    password: PURCHASE_ACCOUNTING_LOCAL
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+  database:
+    driverClassName: org.postgresql.Driver
+  flyway:
+    enabled: true #Enable false for production
+    url: jdbc:postgresql://localhost:5432/postgres
+    schemas: public
+    user: "PURCHASE_ACCOUNTING_ADMIN"
+    password: "PURCHASE_ACCOUNTING_LOCAL"
+
+feign:
+  client:
+    config:
+      fiscalData:
+        url: "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/od/rates_of_exchange"
+
+server:
+  port: 8081
