@@ -1,0 +1,26 @@
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: PURCHASE_ACCOUNTING_ADMIN
+    password: PURCHASE_ACCOUNTING_LOCAL
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+  database:
+    driverClassName: org.postgresql.Driver
+  flyway:
+    enabled: true
+    baseLineOnMigrate: true
+    cleanOnValidationError: false
+    jpa:
+      open-in-view: false
+
+
+server:
+  port: 8081
