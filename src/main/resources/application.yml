@@ -16,10 +16,10 @@ spring:
     driverClassName: org.postgresql.Driver
   flyway:
     enabled: true
-    baseLineOnMigrate: true
-    cleanOnValidationError: false
-    jpa:
-      open-in-view: false
+    url: jdbc:postgresql://localhost:5432/postgres
+    schemas: postgres
+    user: "PURCHASE_ACCOUNTING_ADMIN"
+    password: "PURCHASE_ACCOUNTING_LOCAL"
 
 
 server:

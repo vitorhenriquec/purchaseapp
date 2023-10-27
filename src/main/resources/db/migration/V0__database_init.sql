@@ -1,7 +1,7 @@
 CREATE sequence sq_purchase_idt;
 
 CREATE TABLE purchase (
-    id number DEFAULT sq_purchase_idt.NEXTVAL,
+    id int8,
     description varchar(50) not null,
     created_at date not null,
     amount decimal not null,
