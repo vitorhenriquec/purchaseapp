@@ -1,5 +1,6 @@
 package com.vitor.bezerra.purchaseapp.unit.usecase;
 
+import com.vitor.bezerra.purchaseapp.domain.InvalidPurchaseValueException;
 import com.vitor.bezerra.purchaseapp.domain.gateway.PurchaseDatabaseGateway;
 import com.vitor.bezerra.purchaseapp.domain.model.PurchaseModel;
 import com.vitor.bezerra.purchaseapp.domain.usecase.CreatePurchaseUseCaseImpl;
@@ -58,7 +59,7 @@ public class CreatePurchaseUseCaseImplTest {
         newPurchaseModel.setAmount(INVALID_NEGATIVE_AMOUNT);
 
         assertThrows(
-                Exception.class,
+                InvalidPurchaseValueException.class,
                 () -> {
                    createPurchaseUseCase.createPurchase(newPurchaseModel);
                 }
@@ -74,7 +75,7 @@ public class CreatePurchaseUseCaseImplTest {
         newPurchaseModel.setDescription(INVALID_DESCRIPTION);
 
         assertThrows(
-                Exception.class,
+                InvalidPurchaseValueException.class,
                 () -> {
                     createPurchaseUseCase.createPurchase(newPurchaseModel);
                 }

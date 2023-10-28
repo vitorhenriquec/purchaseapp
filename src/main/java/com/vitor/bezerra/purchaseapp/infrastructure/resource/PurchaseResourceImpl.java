@@ -1,5 +1,6 @@
 package com.vitor.bezerra.purchaseapp.infrastructure.resource;
 
+import com.vitor.bezerra.purchaseapp.domain.InvalidPurchaseValueException;
 import com.vitor.bezerra.purchaseapp.domain.model.PurchaseModel;
 import com.vitor.bezerra.purchaseapp.domain.usecase.CreatePurchaseUseCase;
 import com.vitor.bezerra.purchaseapp.infrastructure.resource.exchange.CreatePurchaseRequest;
@@ -19,7 +20,7 @@ import java.time.LocalDate;
 @RequestMapping("/v1/purchase")
 @RestController
 @Tag(name="Purchase Resource")
-public class PurchaseResourceImpl implements PurchaseResource{
+public class PurchaseResourceImpl implements PurchaseResource {
 
     private final CreatePurchaseUseCase createPurchaseUseCase;
 
@@ -27,7 +28,7 @@ public class PurchaseResourceImpl implements PurchaseResource{
     @Override
     public ResponseEntity<CreatePurchaseResponse> createTransaction(
             @RequestBody @Valid CreatePurchaseRequest request
-    ) {
+    ) throws InvalidPurchaseValueException {
         var purchaseModel = new PurchaseModel();
         purchaseModel.setDescription(request.description());
         purchaseModel.setAmount(request.amount());
@@ -40,7 +41,7 @@ public class PurchaseResourceImpl implements PurchaseResource{
                         purchaseModel.getId(),
                         purchaseModel.getDescription(),
                         purchaseModel.getAmount(),
-                        purchaseModel.getCreatedAt()
+                        purchaseModel.getCreatedAt().toString()
                 )
         );
     }

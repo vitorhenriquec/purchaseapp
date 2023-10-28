@@ -25,9 +25,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
+import static com.vitor.bezerra.purchaseapp.unit.utils.Constants.INVALID_DESCRIPTION;
+import static com.vitor.bezerra.purchaseapp.unit.utils.Constants.INVALID_NEGATIVE_AMOUNT;
 import static com.vitor.bezerra.purchaseapp.unit.utils.MockHelper.createSavedPurchaseModel;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -76,7 +81,63 @@ public class PurchaseResourceImplTest {
         ).andDo(print())
         .andExpect(status().isOk())
         .andExpect(content().contentType(APPLICATION_JSON))
-        .andExpect(jsonPath("$.id").value(1L));
+        .andExpect(jsonPath("$.id").value(1L))
+        .andExpect(jsonPath("$.description").value("A beautiful description"))
+        .andExpect(jsonPath("$.amount").value(10.33))
+        .andExpect(jsonPath("$.createdAt").value(LocalDate.now().toString()));
+    }
+
+    @Test
+    @DisplayName("Should not create a purchase when amount is invalid")
+    public void shouldNotCreatePurchaseAmountInvalid() throws Exception {
+        mockMvc.perform(
+                        post("/v1/purchase")
+                                .contentType(APPLICATION_JSON)
+                                .content(getCreatePurchaseModelString("Description", INVALID_NEGATIVE_AMOUNT))
+                ).andDo(print())
+                .andExpect(status().isBadRequest());
+
+        verify(createPurchaseUseCase, times(0)).createPurchase(any());
+    }
+
+
+    @Test
+    @DisplayName("Should not create a purchase when description is invalid")
+    public void shouldNotCreatePurchaseDescriptionInvalid() throws Exception {
+        mockMvc.perform(
+                        post("/v1/purchase")
+                                .contentType(APPLICATION_JSON)
+                                .content(getCreatePurchaseModelString(INVALID_DESCRIPTION, new BigDecimal("10.33")))
+                ).andDo(print())
+                .andExpect(status().isBadRequest());
+
+        verify(createPurchaseUseCase, times(0)).createPurchase(any());
+    }
+
+    @Test
+    @DisplayName("Should not create a purchase when description is null")
+    public void shouldNotCreatePurchaseDescriptionNull() throws Exception {
+        mockMvc.perform(
+                        post("/v1/purchase")
+                                .contentType(APPLICATION_JSON)
+                                .content(getCreatePurchaseModelString(null, new BigDecimal("10.33")))
+                ).andDo(print())
+                .andExpect(status().isBadRequest());
+
+        verify(createPurchaseUseCase, times(0)).createPurchase(any());
+    }
+
+    @Test
+    @DisplayName("Should not create a purchase when amount is null")
+    public void shouldNotCreatePurchaseAmountNull() throws Exception {
+        mockMvc.perform(
+                        post("/v1/purchase")
+                                .contentType(APPLICATION_JSON)
+                                .content(getCreatePurchaseModelString("Description", null))
+                ).andDo(print())
+                .andExpect(status().isBadRequest());
+
+        verify(createPurchaseUseCase, times(0)).createPurchase(any());
     }
 
     private String getCreatePurchaseModelString(final String description, final BigDecimal amount) throws JsonProcessingException {
