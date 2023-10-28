@@ -20,7 +20,7 @@ import java.time.LocalDate;
 @RequestMapping("/v1/purchase")
 @RestController
 @Tag(name="Purchase Resource")
-public class PurchaseResourceImpl implements PurchaseResource{
+public class PurchaseResourceImpl implements PurchaseResource {
 
     private final CreatePurchaseUseCase createPurchaseUseCase;
 

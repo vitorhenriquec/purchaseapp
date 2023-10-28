@@ -17,6 +17,5 @@ public class ObjectMapperConfig {
                 .setSerializationInclusion(JsonInclude.Include.NON_NULL)
                 .findAndRegisterModules()
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-                //.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
     }
 }
