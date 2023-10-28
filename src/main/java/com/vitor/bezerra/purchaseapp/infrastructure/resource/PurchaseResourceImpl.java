@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,21 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-
 @AllArgsConstructor
+@RequestMapping("/v1/purchase")
 @RestController
-@RequestMapping(name = "/v1")
-@Tag(name = "Purchase")
-public class PurchaseResourceImpl implements PurchaseResource {
+@Tag(name="Purchase Resource")
+public class PurchaseResourceImpl implements PurchaseResource{
 
     private final CreatePurchaseUseCase createPurchaseUseCase;
 
-    @PostMapping(
-            name = "/purchase",
-            consumes = APPLICATION_JSON_VALUE,
-            produces = APPLICATION_JSON_VALUE
-    )
+    @PostMapping
     @Override
     public ResponseEntity<CreatePurchaseResponse> createTransaction(
             @RequestBody @Valid CreatePurchaseRequest request
@@ -50,14 +43,5 @@ public class PurchaseResourceImpl implements PurchaseResource {
                         purchaseModel.getCreatedAt()
                 )
         );
-    }
-
-    @Override
-    @GetMapping(
-            name = "/purchase/{purchaseId}",
-            produces = APPLICATION_JSON_VALUE
-    )
-    public ResponseEntity<CreatePurchaseResponse> retrieveTransaction(final Long purchaseId) {
-        return null;
     }
 }

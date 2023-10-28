@@ -29,7 +29,6 @@ dependencies {
 	implementation 'org.flywaydb:flyway-core'
 
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
-	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.postgresql:postgresql'
@@ -42,11 +41,5 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
-}
-
-dependencyManagement {
-	imports {
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:2021.0.5"
-	}
 }
 

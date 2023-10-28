@@ -31,24 +31,4 @@ public interface PurchaseResource {
             @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Purchase data to be store")
             CreatePurchaseRequest request
     );
-
-    @Operation(summary = "This endpoint retrieves a purchase in a Specified Country’s" +
-            "Currency")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Purchase convert to specified country's",
-                            content = {
-                                    @Content(
-                                            mediaType = APPLICATION_JSON_VALUE,
-                                            schema = @Schema(implementation = CreatePurchaseResponse.class)
-                                    )
-                            }
-                    )
-            }
-    )
-    ResponseEntity<CreatePurchaseResponse> retrieveTransaction(
-            final Long purchaseId
-    );
 }

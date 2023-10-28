@@ -7,5 +7,5 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @RestControllerAdvice
 @Order(Ordered.HIGHEST_PRECEDENCE)
-public class PurchaseExceptionHandler extends ResponseEntityExceptionHandler {
+public class PurchaseExceptionHandler{
 }

@@ -2,10 +2,11 @@ springdoc:
   api-docs:
     enabled: true
 
+logging:
+  level:
+    root: "INFO"
+
 spring:
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
   datasource:
     platform: postgres
     url: jdbc:postgresql://localhost:5432/postgres
@@ -25,11 +26,7 @@ spring:
     user: "PURCHASE_ACCOUNTING_ADMIN"
     password: "PURCHASE_ACCOUNTING_LOCAL"
 
-feign:
-  client:
-    config:
-      fiscalData:
-        url: "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/od/rates_of_exchange"
-
 server:
-  port: 8081
+  port: 8082
+  max-http-form-post-size: 100MB
+
