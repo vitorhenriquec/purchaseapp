@@ -1,5 +1,6 @@
 package com.vitor.bezerra.purchaseapp.infrastructure.resource;
 
+import com.vitor.bezerra.purchaseapp.domain.InvalidPurchaseValueException;
 import com.vitor.bezerra.purchaseapp.infrastructure.resource.exchange.CreatePurchaseRequest;
 import com.vitor.bezerra.purchaseapp.infrastructure.resource.exchange.CreatePurchaseResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,5 +31,5 @@ public interface PurchaseResource {
     ResponseEntity<CreatePurchaseResponse> createTransaction(
             @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Purchase data to be store")
             CreatePurchaseRequest request
-    );
+    ) throws InvalidPurchaseValueException;
 }

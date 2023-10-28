@@ -10,6 +10,6 @@ public record CreatePurchaseResponse(
 
         BigDecimal amount,
 
-        LocalDate createdAt
+        String createdAt
 ) {
 }

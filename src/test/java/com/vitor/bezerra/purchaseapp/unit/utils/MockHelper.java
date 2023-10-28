@@ -17,7 +17,7 @@ public class MockHelper {
     public static PurchaseModel createSavedPurchaseModel() {
         return new PurchaseModel(
                 1L,
-                "A beatiful description",
+                "A beautiful description",
                 LocalDate.now(),
                 new BigDecimal("10.33")
         );
@@ -26,7 +26,7 @@ public class MockHelper {
     public static PurchaseEntity createSavedPurchaseEntity() {
         return new PurchaseEntity(
                 1L,
-                "A beatiful description",
+                "A beautiful description",
                 LocalDate.now(),
                 new BigDecimal("10.33")
         );
