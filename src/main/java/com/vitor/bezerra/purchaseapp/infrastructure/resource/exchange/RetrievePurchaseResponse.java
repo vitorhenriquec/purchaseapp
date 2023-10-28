@@ -4,14 +4,14 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-public record RetrivePurchaseResponse(
+public record RetrievePurchaseResponse(
         Long id,
 
         String description,
 
         BigDecimal amount,
 
-        LocalDate createdAt,
+        String createdAt,
 
         List<AmountConversion> amountConversions
 ) {

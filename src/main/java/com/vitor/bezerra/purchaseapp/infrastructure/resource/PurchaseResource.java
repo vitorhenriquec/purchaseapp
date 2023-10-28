@@ -1,8 +1,10 @@
 package com.vitor.bezerra.purchaseapp.infrastructure.resource;
 
-import com.vitor.bezerra.purchaseapp.domain.InvalidPurchaseValueException;
+import com.vitor.bezerra.purchaseapp.domain.exception.InvalidPurchaseValueException;
+import com.vitor.bezerra.purchaseapp.domain.exception.PurchaseNotFoundException;
 import com.vitor.bezerra.purchaseapp.infrastructure.resource.exchange.CreatePurchaseRequest;
 import com.vitor.bezerra.purchaseapp.infrastructure.resource.exchange.CreatePurchaseResponse;
+import com.vitor.bezerra.purchaseapp.infrastructure.resource.exchange.RetrievePurchaseResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -32,4 +34,23 @@ public interface PurchaseResource {
             @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Purchase data to be store")
             CreatePurchaseRequest request
     ) throws InvalidPurchaseValueException;
+
+    @Operation(summary = "This endpoint retrieves a purchase")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Purchase retrieved",
+                            content = {
+                                    @Content(
+                                            mediaType = APPLICATION_JSON_VALUE,
+                                            schema = @Schema(implementation = RetrievePurchaseResponse.class)
+                                    )
+                            }
+                    )
+            }
+    )
+    ResponseEntity<RetrievePurchaseResponse> retrievePurchase(
+            final Long purchaseId
+    ) throws PurchaseNotFoundException;
 }

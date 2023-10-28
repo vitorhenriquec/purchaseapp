@@ -1,5 +1,6 @@
 package com.vitor.bezerra.purchaseapp.infrastructure.adapter;
 
+import com.vitor.bezerra.purchaseapp.domain.exception.PurchaseNotFoundException;
 import com.vitor.bezerra.purchaseapp.domain.gateway.PurchaseDatabaseGateway;
 import com.vitor.bezerra.purchaseapp.domain.model.PurchaseModel;
 import com.vitor.bezerra.purchaseapp.infrastructure.adapter.repository.PurchaseRepository;
@@ -25,5 +26,11 @@ public class PurchaseDatabaseAdapter implements PurchaseDatabaseGateway {
                 purchaseMapper.toEntity(purchaseModel)
             )
         );
+    }
+
+    @Override
+    public PurchaseModel findById(final Long purchaseId) throws PurchaseNotFoundException {
+        final var purchaseEntity = purchaseRepository.findById(purchaseId).orElseThrow(() -> new PurchaseNotFoundException());
+        return purchaseMapper.toModel(purchaseEntity);
     }
 }
