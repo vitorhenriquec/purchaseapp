@@ -30,7 +30,7 @@ public class PurchaseDatabaseAdapter implements PurchaseDatabaseGateway {
 
     @Override
     public PurchaseModel findById(final Long purchaseId) throws PurchaseNotFoundException {
-        final var purchaseEntity = purchaseRepository.findById(purchaseId).orElseThrow(() -> new PurchaseNotFoundException());
+        final var purchaseEntity = purchaseRepository.findById(purchaseId).orElseThrow(PurchaseNotFoundException::new);
         return purchaseMapper.toModel(purchaseEntity);
     }
 }
