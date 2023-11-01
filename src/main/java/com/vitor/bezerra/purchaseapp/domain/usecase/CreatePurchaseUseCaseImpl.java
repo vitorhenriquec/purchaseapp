@@ -15,7 +15,7 @@ public class CreatePurchaseUseCaseImpl implements CreatePurchaseUseCase {
 
     private final PurchaseDatabaseGateway purchaseDatabaseGateway;
 
-    private static final int NUMBER_DECIMAL_PLACES = 2;
+    public static final int NUMBER_DECIMAL_PLACES = 2;
 
     @Override
     public PurchaseModel createPurchase(PurchaseModel purchaseModel) throws InvalidPurchaseValueException {

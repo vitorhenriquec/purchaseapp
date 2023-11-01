@@ -17,6 +17,8 @@ public interface FiscalDataClient {
     )
     ResponseEntity<ExchangeRateResponse> getExchangeRateFilterByDate(
             @RequestParam(name = "fields") final String fields,
-            @RequestParam(name = "filter") final String filter
+            @RequestParam(name = "filter") final String filter,
+            @RequestParam(name="page[number]") final Integer page,
+            @RequestParam(name="page[size]") final Integer size
     );
 }

@@ -6,7 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
+
+import static com.vitor.bezerra.purchaseapp.domain.usecase.CreatePurchaseUseCaseImpl.NUMBER_DECIMAL_PLACES;
 
 @Data
 @NoArgsConstructor
@@ -29,7 +32,7 @@ public class RetrievePurchaseResponse{
         this.amountConversions = fiscalDataModels.stream().map(fiscalDataModel -> new AmountConversion(
                 fiscalDataModel.getCountryCurrencyDesc(),
                 fiscalDataModel.getExchangeRate(),
-                purchaseModel.getAmount().multiply(fiscalDataModel.getExchangeRate())
+                purchaseModel.getAmount().multiply(fiscalDataModel.getExchangeRate()).setScale(NUMBER_DECIMAL_PLACES, RoundingMode.HALF_UP)
         )).toList();
     }
 }
