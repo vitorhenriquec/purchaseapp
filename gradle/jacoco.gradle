@@ -1,0 +1,26 @@
+jacoco {
+    toolVersion = "0.8.8"
+}
+
+tasks.named("jacocoTestReport") {
+    executionData(file("${project.buildDir}/jacoco/test.exec"))
+
+    reports {
+        html.required.set(true);
+        html.outputLocation.set(file("$buildDir/reports/jacoco/all-tests/html"))
+    }
+
+    classDirectories.setFrom(
+            files(
+                    classDirectories.files.collect {
+                        fileTree(it) {
+                            exclude("**/model/**")
+                            exclude("**/configuration/")
+                            exclude("**/exchange/**")
+                        }
+                    }
+            )
+    )
+
+    dependsOn(tasks.test)
+}

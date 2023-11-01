@@ -12,6 +12,7 @@ import com.vitor.bezerra.purchaseapp.infrastructure.resource.exchange.RetrievePu
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.data.util.Pair;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.antlr.v4.runtime.misc.Pair;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -61,17 +61,17 @@ public class PurchaseResourceImpl implements PurchaseResource {
     public ResponseEntity<RetrievePurchaseResponse> retrievePurchase(
             @PathVariable("purchaseId") final Long purchaseId
     ) throws PurchaseNotFoundException {
-        final Pair<PurchaseModel, FiscalDataModel> pairPurchaseFiscalDataModel = retrievePurchaseUseCase.retrivePurchase(purchaseId);
+        final Pair<PurchaseModel, List<FiscalDataModel>> pairPurchaseFiscalDataModels =
+                retrievePurchaseUseCase.retrivePurchase(purchaseId);
 
-        final var purchaseModel = pairPurchaseFiscalDataModel.a;
+        final var purchaseModel = pairPurchaseFiscalDataModels.getFirst();
+        final var fiscalDataModels = pairPurchaseFiscalDataModels.getSecond();
 
-        return ResponseEntity.ok(new RetrievePurchaseResponse(
-                purchaseModel.getId(),
-                purchaseModel.getDescription(),
-                purchaseModel.getAmount(),
-                purchaseModel.getCreatedAt().toString(),
-                List.of()
-            )
+        return ResponseEntity.ok(
+                new RetrievePurchaseResponse(
+                    purchaseModel,
+                    fiscalDataModels
+                )
         );
     }
 }
