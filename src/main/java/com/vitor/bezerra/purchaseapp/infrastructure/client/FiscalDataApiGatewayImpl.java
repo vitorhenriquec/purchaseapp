@@ -25,7 +25,7 @@ public class FiscalDataApiGatewayImpl implements FiscalDataApiGateway {
 
     private static final int PAGE_NUMBER = 1;
 
-    private static final int PAGE_SIZE = 1;
+    private static final int PAGE_SIZE = 100;
 
     private static final String FISCAL_DATA_FIELDS = "country_currency_desc, exchange_rate";
 
