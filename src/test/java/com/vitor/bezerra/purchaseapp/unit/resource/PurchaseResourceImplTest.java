@@ -1,15 +1,19 @@
 package com.vitor.bezerra.purchaseapp.unit.resource;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.vitor.bezerra.purchaseapp.domain.gateway.FiscalDataApiGateway;
 import com.vitor.bezerra.purchaseapp.domain.usecase.CreatePurchaseUseCase;
 import com.vitor.bezerra.purchaseapp.domain.usecase.CreatePurchaseUseCaseImpl;
+import com.vitor.bezerra.purchaseapp.domain.usecase.RetrievePurchaseUseCase;
 import com.vitor.bezerra.purchaseapp.infrastructure.adapter.repository.PurchaseRepository;
+import com.vitor.bezerra.purchaseapp.infrastructure.configuration.CacheConfig;
 import com.vitor.bezerra.purchaseapp.infrastructure.configuration.ObjectMapperConfig;
 import com.vitor.bezerra.purchaseapp.infrastructure.configuration.PurchaseConfig;
 import com.vitor.bezerra.purchaseapp.infrastructure.handler.PurchaseExceptionHandler;
 import com.vitor.bezerra.purchaseapp.infrastructure.mapper.PurchaseMapper;
 import com.vitor.bezerra.purchaseapp.infrastructure.resource.PurchaseResourceImpl;
 import com.vitor.bezerra.purchaseapp.infrastructure.resource.exchange.CreatePurchaseRequest;
+import com.vitor.bezerra.purchaseapp.infrastructure.resource.exchange.RetrievePurchaseResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +45,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(classes = {PurchaseResourceImpl.class, CreatePurchaseUseCaseImpl.class, ObjectMapperConfig.class})
+@SpringBootTest(classes = {PurchaseResourceImpl.class, CreatePurchaseUseCaseImpl.class, RetrievePurchaseUseCase.class, ObjectMapperConfig.class})
 @AutoConfigureMockMvc
 @EnableAutoConfiguration(
         exclude = {
@@ -50,13 +54,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
                 DataSourceTransactionManagerAutoConfiguration.class
         }
 )
-@ContextConfiguration(classes = {PurchaseExceptionHandler.class, CreatePurchaseUseCase.class, ObjectMapperConfig.class, PurchaseConfig.class})
+@ContextConfiguration(classes = {PurchaseExceptionHandler.class, CreatePurchaseUseCase.class, RetrievePurchaseUseCase.class, ObjectMapperConfig.class, PurchaseConfig.class, CacheConfig.class, FiscalDataApiGateway.class})
 public class PurchaseResourceImplTest {
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
     private CreatePurchaseUseCase createPurchaseUseCase;
+
+    @MockBean
+    private RetrievePurchaseUseCase retrievePurchaseUseCase;
 
     @Autowired
     private ObjectMapper mapper;
@@ -66,6 +73,9 @@ public class PurchaseResourceImplTest {
 
     @MockBean
     private PurchaseMapper purchaseMapper;
+
+    @MockBean
+    private FiscalDataApiGateway fiscalDataApiGateway;
 
     @Test
     @DisplayName("Should create a purchase with success")
