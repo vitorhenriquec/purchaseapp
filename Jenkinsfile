@@ -4,9 +4,9 @@ node {
     def gradle = "./gradlew"
 
     try {
-//         stage("Clone the project") {
-//             git branch: 'main', url: 'https://github.com/vitorhenriquec/purchaseapp.git'
-//         }
+        stage("Clone the project") {
+            git branch: 'main', url: 'https://github.com/vitorhenriquec/purchaseapp.git'
+        }
 
         stage("Checkout") {
             checkout scm
