@@ -1,6 +1,6 @@
 package com.vitor.bezerra.purchaseapp.domain.usecase;
 
-import com.vitor.bezerra.purchaseapp.domain.InvalidPurchaseValueException;
+import com.vitor.bezerra.purchaseapp.domain.exception.InvalidPurchaseValueException;
 import com.vitor.bezerra.purchaseapp.domain.gateway.PurchaseDatabaseGateway;
 import com.vitor.bezerra.purchaseapp.domain.model.PurchaseModel;
 import lombok.AllArgsConstructor;
@@ -15,7 +15,7 @@ public class CreatePurchaseUseCaseImpl implements CreatePurchaseUseCase {
 
     private final PurchaseDatabaseGateway purchaseDatabaseGateway;
 
-    private static final int NUMBER_DECIMAL_PLACES = 2;
+    public static final int NUMBER_DECIMAL_PLACES = 2;
 
     @Override
     public PurchaseModel createPurchase(PurchaseModel purchaseModel) throws InvalidPurchaseValueException {

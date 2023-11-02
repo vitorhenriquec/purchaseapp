@@ -27,6 +27,12 @@ spring:
     password: "PURCHASE_ACCOUNTING_LOCAL"
 
 server:
-  port: 8082
-  max-http-form-post-size: 100MB
+  port: 8081
+
+
+feign:
+  client:
+    config:
+      fiscalDataApi:
+        url: "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/od/rates_of_exchange"
 

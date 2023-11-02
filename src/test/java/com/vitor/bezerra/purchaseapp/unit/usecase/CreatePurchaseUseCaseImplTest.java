@@ -1,6 +1,6 @@
 package com.vitor.bezerra.purchaseapp.unit.usecase;
 
-import com.vitor.bezerra.purchaseapp.domain.InvalidPurchaseValueException;
+import com.vitor.bezerra.purchaseapp.domain.exception.InvalidPurchaseValueException;
 import com.vitor.bezerra.purchaseapp.domain.gateway.PurchaseDatabaseGateway;
 import com.vitor.bezerra.purchaseapp.domain.model.PurchaseModel;
 import com.vitor.bezerra.purchaseapp.domain.usecase.CreatePurchaseUseCaseImpl;
