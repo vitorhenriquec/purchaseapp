@@ -2,13 +2,25 @@ version: '3.3'
 
 networks:
   purchase_network:
+    driver: bridge
     ipam:
-      driver: default
       config:
         - subnet: 145.0.0.0/16
 
 
 services:
+  purchase-app:
+    image: purchaseappapi:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    networks:
+      purchase_network:
+        ipv4_address: 145.0.0.3
+    depends_on:
+      - purchase_postgres
   purchase_postgres:
     container_name: purchase_postgres
     image: postgres:13.5

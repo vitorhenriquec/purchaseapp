@@ -19,7 +19,7 @@ spring:
   database:
     driverClassName: org.postgresql.Driver
   flyway:
-    enabled: true
+    enabled: false
     url: jdbc:postgresql://purchase_postgres:5432/postgres
     schemas: public
     user: "PURCHASE_ACCOUNTING_ADMIN"

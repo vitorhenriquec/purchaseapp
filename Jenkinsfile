@@ -19,6 +19,10 @@ node {
         stage("Test") {
             bat "${gradle} test"
         }
+
+        stage("Docker build") {
+            bat "docker build -t purchaseappapi ."
+        }
     } catch(Exception e) {
         echo "Deployment error. Cause: ${e}"
         throw e
