@@ -1,7 +1,7 @@
 #!groovy
 
 node {
-    def gradle = "./gradlew "
+    def gradle = "./gradlew"
 
     try {
 //         stage("Clone the project") {
@@ -20,5 +20,7 @@ node {
             sh "${gradle} test"
         }
     } catch(Exception e) {
+        echo "Deployment error. Cause: ${e}"
+        throw e
     }
 }
