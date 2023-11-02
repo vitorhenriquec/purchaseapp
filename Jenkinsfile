@@ -1,6 +1,6 @@
 #!groovy
 
-node("java17") {
+node {
     def gradle = "./gradlew "
 
     try {
