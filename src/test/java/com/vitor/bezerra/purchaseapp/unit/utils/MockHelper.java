@@ -1,5 +1,6 @@
 package com.vitor.bezerra.purchaseapp.unit.utils;
 
+import com.vitor.bezerra.purchaseapp.domain.model.FiscalDataModel;
 import com.vitor.bezerra.purchaseapp.domain.model.PurchaseModel;
 import com.vitor.bezerra.purchaseapp.infrastructure.adapter.entity.PurchaseEntity;
 import com.vitor.bezerra.purchaseapp.infrastructure.client.exchange.ExchangeRateData;
@@ -56,5 +57,25 @@ public class MockHelper {
                 Map.of("total-pages", 2, "total-count", 169),
                 Map.of()
         );
+    }
+
+    public static ExchangeRateResponse createEmptyExchangeRateResponsePage() {
+        return new ExchangeRateResponse(
+                List.of(),
+                Map.of("total-pages", 0, "total-count", 0),
+                Map.of()
+        );
+    }
+
+    public static List<FiscalDataModel> createListOfFiscalDataModel() {
+        return List.of(
+                new FiscalDataModel("United Arab Emirates-Dirham", new BigDecimal("3.673")),
+                new FiscalDataModel("Vietnam-Dong", new BigDecimal("24280.0")),
+                new FiscalDataModel("Zimbabwe-RTGS", new BigDecimal("5466.75"))
+        );
+    }
+
+    public static List<FiscalDataModel> createEmptyListOfFiscalDataModel() {
+        return List.of();
     }
 }

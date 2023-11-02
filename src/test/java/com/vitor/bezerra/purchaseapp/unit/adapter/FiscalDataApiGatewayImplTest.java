@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import static com.vitor.bezerra.purchaseapp.unit.utils.MockHelper.createEmptyExchangeRateResponsePage;
 import static com.vitor.bezerra.purchaseapp.unit.utils.MockHelper.createFirstExchangeRateResponsePage;
 import static com.vitor.bezerra.purchaseapp.unit.utils.MockHelper.createSecondExchangeRateResponsePage;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -53,6 +54,22 @@ public class FiscalDataApiGatewayImplTest {
 
         when(fiscalDataMapper.toModel(any())).thenReturn(
                 new FiscalDataModel("United Arab Emirates-Dirham", new BigDecimal("3.673"))
+        );
+
+        assertDoesNotThrow(
+                () -> {
+                    assertNotNull(fiscalDataApiGatewayImpl.retriveFiscalDataByDate(LocalDate.now().toString()));
+                }
+        );
+    }
+
+    @Test
+    @DisplayName("Should successfully retrieve fiscal data from date when the api answers with zero data")
+    public void shouldSuccessfullyRetriveFiscalDataFromDateWithZeroData() {
+        when(fiscalDataClient.getExchangeRateFilterByDate(anyString(), anyString(), eq(1), eq(100))).thenReturn(
+                ResponseEntity.ok(
+                        createEmptyExchangeRateResponsePage()
+                )
         );
 
         assertDoesNotThrow(

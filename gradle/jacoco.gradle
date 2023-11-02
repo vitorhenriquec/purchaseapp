@@ -14,7 +14,11 @@ tasks.named("jacocoTestReport") {
             files(
                     classDirectories.files.collect {
                         fileTree(it) {
+                            exclude("**/purchaseapp/PurchaseappApplication**")
                             exclude("**/model/**")
+                            exclude("**/entity/**")
+                            exclude("**/handler/**")
+                            exclude("**/exception/**")
                             exclude("**/configuration/")
                             exclude("**/exchange/**")
                         }
