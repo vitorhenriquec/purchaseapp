@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.test.context.ActiveProfiles;
 
 import static com.vitor.bezerra.purchaseapp.unit.utils.MockHelper.createEmptyListOfFiscalDataModel;
 import static com.vitor.bezerra.purchaseapp.unit.utils.MockHelper.createListOfFiscalDataModel;
@@ -28,6 +29,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@ActiveProfiles(profiles = "test")
 @SpringBootTest(classes = {RetrievePurchaseUseCaseImpl.class, PurchaseDatabaseGateway.class, FiscalDataApiGateway.class})
 public class RetrievePurchaseUseCaseImplTest {
 
