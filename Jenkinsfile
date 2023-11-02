@@ -3,6 +3,8 @@
 node {
     def gradle = "./gradlew"
 
+    agent any
+
     try {
         stage("Clone the project") {
             git branch: 'main', url: 'https://github.com/vitorhenriquec/purchaseapp.git'
@@ -13,11 +15,11 @@ node {
         }
 
         stage("Build Application") {
-            sh "${gradle} clean build -x test"
+            bat "${gradle} clean build -x test"
         }
 
         stage("Test") {
-            sh "${gradle} test"
+            bat "${gradle} test"
         }
     } catch(Exception e) {
         echo "Deployment error. Cause: ${e}"
