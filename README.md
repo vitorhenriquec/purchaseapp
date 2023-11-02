@@ -4,11 +4,14 @@ API that stores a purchase
 ## Prerequisites
 * [Java] 1.17+;
 * [Gradle] 6/7+;
+* [Jenkins] 2.414.3 LTS
+* [Docker]
+* [docker-compose]
 
 
 ## Architecture
 
-The project is design following the clean architecture concepts.
+The project design follows the clean architecture concepts.
 
 ## Setting up local containers
 
@@ -75,6 +78,29 @@ You can set up and environment either:
 ./gradlew bootRun --args='--spring.profiles.active=<profile_name>'
 ```
 
+## Running using Docker
+
+This project has a Docker and docker-compose.yml file. To run the application execute the commands:
+
+```
+./gradlew docker build -t purchaseappapi .
+docker-compose up -d
+```
+
+## Simulate a deploy by Jenkins
+
+The project has a `Jenkins file` with some stages set up. With your local Jenkins installed and running, you can also execute a build. This build process will perform and simulate a deployment in your local machine.  
+
 ## Swagger
 
-Swagger is set up to be access in {HOST}/swagger-ui/index.html
+Swagger is set up to be access at `{HOST}/swagger-ui/index.html`
+
+## Jacoco
+
+The project has the Jacoco set up. After performing the following command:
+
+```
+./gradlew clean build'
+```
+
+You can check the test coverage reports at `/build/reports/jacoco/all-tests/html/index.html` path of your project.

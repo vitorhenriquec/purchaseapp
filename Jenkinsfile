@@ -20,6 +20,10 @@ node {
             bat "${gradle} test"
         }
 
+        stage("Jacoco") {
+            bat "${gradle} jacocoTestReport"
+        }
+
         stage("Docker build") {
             bat "docker build -t purchaseappapi ."
         }
