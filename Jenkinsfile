@@ -23,6 +23,10 @@ node {
         stage("Docker build") {
             bat "docker build -t purchaseappapi ."
         }
+
+        stage("Running the app") {
+            bat "docker-compose up -d"
+        }
     } catch(Exception e) {
         echo "Deployment error. Cause: ${e}"
         throw e
